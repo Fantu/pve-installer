@@ -187,15 +187,15 @@ my ($ipversion, $ipaddress, $ipconf_entry_addr);
 my ($netmask, $ipconf_entry_mask);
 my ($gateway, $ipconf_entry_gw);
 my ($dnsserver, $ipconf_entry_dns);
-my $hostname = 'proxmox';
-my $domain = 'domain.tld';
+my $hostname = 'univirt';
+my $domain = 'mydomain.local';
 my $cmdline = file_read_firstline("/proc/cmdline");
 my $ipconf;
 my $country;
-my $timezone = 'Europe/Vienna';
+my $timezone = 'Europe/Rome';
 my $password;
 my $mailto;
-my $keymap = 'en-us';
+my $keymap = 'it';
 my $cmap;
 
 # parse command line args
@@ -1577,7 +1577,7 @@ _EOD
 	mkdir $tmpdir;
 
 	# write vnc keymap to datacenter.cfg
-	my $vnckmap = $cmap->{kmap}->{$keymap}->{kvm} || 'en-us';
+	my $vnckmap = $cmap->{kmap}->{$keymap}->{kvm} || 'it';
 	write_config ("keyboard: $vnckmap\n",
 		      "$tmpdir/datacenter.cfg");
 
@@ -2111,7 +2111,7 @@ sub update_layout {
     my $i = 0;
     my $kmaphash = $cmap->{kmaphash};
     foreach my $layout (sort keys %$kmaphash) {
-	$def = $i if $kmaphash->{$layout} eq 'en-us';
+	$def = $i if $kmaphash->{$layout} eq 'it';
 	$ind = $i if $kmap && $kmaphash->{$layout} eq $kmap;
 	$i++;
     }
@@ -2309,7 +2309,7 @@ sub create_country_view {
 
 	if (my $cc = $countryhash->{lc($text)}) {
 	    update_zonelist ($hbox2, $cc);
-	    my $kmap = $ctr->{$cc}->{kmap} || 'en-us';
+	    my $kmap = $ctr->{$cc}->{kmap} || 'it';
 	    update_layout ($kmapcb, $kmap);
 	}
     });
