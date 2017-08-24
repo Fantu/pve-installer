@@ -2875,7 +2875,7 @@ sub create_hdsel_view {
     my ($disk, $devname, $size, $model) = @{@$hds[0]};
     $target_hd = $devname;
 
-    $target_hd_label = Gtk3::Label->new ("Target Harddisk: ");
+    $target_hd_label = Gtk3::Label->new ("Harddisk di destinazione: ");
     $hbox->pack_start ($target_hd_label, 0, 0, 0);
 
     $target_hd_combo = Gtk3::ComboBoxText->new();
@@ -2894,7 +2894,7 @@ sub create_hdsel_view {
     
     $hbox->pack_start ($target_hd_combo, 0, 0, 10);
 
-    my $options = Gtk3::Button->new ('_Options');
+    my $options = Gtk3::Button->new ('_Opzioni');
     $options->signal_connect (clicked => \&create_hdoption_view);
     $hbox->pack_start ($options, 0, 0, 0);
 
