@@ -1,7 +1,9 @@
 #!/usr/bin/perl -w
 
 $ENV{DEBIAN_FRONTEND} = 'noninteractive';
-$ENV{LC_ALL} = 'C';
+$ENV{LC_ALL} = 'it_IT.UTF-8';
+#$ENV{LC_ALL} = 'C';
+
 
 use strict;
 use Getopt::Long;
@@ -17,6 +19,9 @@ use String::ShellQuote;
 use Data::Dumper;
 use File::Basename;
 use Time::HiRes;
+use utf8;
+use open qw(:utf8);
+binmode STDOUT, ':utf8';
 
 my $release = '5.0';
 
@@ -1645,7 +1650,7 @@ sub display_html {
     my $path = "${proxmox_dir}/html/$filename";
     my $url = "file://$path";
 
-    my $data = file_get_contents($path);
+    my $data = decode('utf8', file_get_contents($path));
 
     if ($filename eq 'license.htm') {
 	my $licensefn = -f "/EULA" ? "/EULA" : 
