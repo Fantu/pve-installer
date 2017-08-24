@@ -1412,7 +1412,8 @@ sub extract_data {
 	# Note: keyboard-configuration/xbkb-keymap is used by console-setup
 	my $xkmap = $cmap->{kmap}->{$keymap}->{x11} // 'us';
 	
-	debconfig_set ($targetdir, <<_EOD); # controllare se possibile variare la localizzazione qui
+     # Controllare se possibile variare la localizzazione qui
+	debconfig_set ($targetdir, <<_EOD);
 locales locales/default_environment_locale select en_US.UTF-8
 locales locales/locales_to_be_generated select en_US.UTF-8 UTF-8
 samba-common samba-common/dhcp boolean false
@@ -2553,7 +2554,7 @@ sub create_hdoption_view {
 
     my $dialog = Gtk3::Dialog->new();
 
-    $dialog->set_title("Harddisk options");
+    $dialog->set_title("Opzioni harddisk");
 
     $dialog->add_button("_OK", 1);
 
@@ -2648,9 +2649,9 @@ sub create_hdoption_view {
     $options_stack->set_visible(1);
     $options_stack->set_hexpand(1);
     $options_stack->set_vexpand(1);
-    $options_stack->add_titled(&$create_raid_disk_grid(), "raiddisk", "Disk Setup");
-    $options_stack->add_titled(&$create_label_widget_grid($hdsize_labeled_widgets), "hdsize", "Size Options");
-    $options_stack->add_titled(&$create_raid_advanced_grid("zfs"), "raidzfsadvanced", "Advanced Options");
+    $options_stack->add_titled(&$create_raid_disk_grid(), "raiddisk", "Setup Dischi");
+    $options_stack->add_titled(&$create_label_widget_grid($hdsize_labeled_widgets), "hdsize", "Opzioni Dimensione");
+    $options_stack->add_titled(&$create_raid_advanced_grid("zfs"), "raidzfsadvanced", "Opzioni Avanzate");
     $options_stack->set_visible_child_name("raiddisk");
     my $options_stack_switcher = Gtk3::StackSwitcher->new();
     $options_stack_switcher->set_halign('center');
@@ -2672,10 +2673,10 @@ sub create_hdoption_view {
 	$options_stack_switcher->set_visible($enable_zfs_opts);
 	$options_stack->get_child_by_name("raidzfsadvanced")->set_visible($enable_zfs_opts);
 	if ($raid) {
-	    $target_hd_label->set_text("Target: $config_options->{filesys} ");
+	    $target_hd_label->set_text("Destinazione: $config_options->{filesys} ");
 	    $options_stack->set_visible_child_name("raiddisk");
 	} else {
-	    $target_hd_label->set_text("Target Harddisk: ");
+	    $target_hd_label->set_text("Harddisk di destinazione: ");
 	}
 	my (undef, $pref_width) = $dialog->get_preferred_width();
 	my (undef, $pref_height) = $dialog->get_preferred_height();
